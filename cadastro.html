@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- CABEÇALHO -->
   <header class="topo">
     <nav class="navbar">
       <div class="logo">
@@ -23,14 +24,17 @@
     </nav>
   </header>
 
+  <!-- CONTEÚDO PRINCIPAL -->
   <main class="conteudo-principal">
     <section class="formulario-container">
       <h2>Cadastro de Voluntários e Doadores</h2>
       <p>Preencha o formulário para participar dos nossos projetos.</p>
 
       <form id="cadastroForm" novalidate>
+        <!-- INFORMAÇÕES PESSOAIS -->
         <fieldset>
           <legend>Informações Pessoais</legend>
+
           <label for="nome">Nome Completo:</label>
           <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
 
@@ -47,8 +51,10 @@
           <input type="date" id="data_nascimento" name="data_nascimento" required>
         </fieldset>
 
+        <!-- ENDEREÇO -->
         <fieldset>
           <legend>Endereço</legend>
+
           <label for="cep">CEP:</label>
           <input type="text" id="cep" name="cep" required placeholder="00000-000">
 
@@ -62,11 +68,42 @@
           <input type="text" id="cidade" name="cidade" required placeholder="Cidade">
 
           <label for="estado">Estado:</label>
-          <input type="text" id="estado" name="estado" required maxlength="2" placeholder="UF">
+          <select id="estado" name="estado" required>
+            <option value="">Selecione</option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+          </select>
         </fieldset>
 
+        <!-- TIPO DE PARTICIPAÇÃO -->
         <fieldset>
           <legend>Tipo de Participação</legend>
+
           <label for="tipo">Selecione sua forma de participação:</label>
           <select id="tipo" name="tipo" required>
             <option value="">-- Escolha uma opção --</option>
@@ -79,6 +116,7 @@
           <textarea id="mensagem" name="mensagem" rows="4" placeholder="Conte um pouco sobre você ou suas motivações."></textarea>
         </fieldset>
 
+        <!-- BOTÕES -->
         <div class="form-botoes">
           <button type="submit">Enviar Cadastro</button>
           <button type="reset" class="botao-secundario">Limpar</button>
@@ -87,10 +125,12 @@
     </section>
   </main>
 
+  <!-- RODAPÉ -->
   <footer class="rodape">
     <p>&copy; 2025 ONG Conecta - Todos os direitos reservados.</p>
   </footer>
 
+  <!-- SCRIPT -->
   <script src="js/scripts.js" defer></script>
 </body>
 </html>
