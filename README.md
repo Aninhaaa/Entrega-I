@@ -86,7 +86,7 @@ A **ONG Conecta** é uma plataforma fictícia que oferece a ONGs uma presença d
 ---
 
 ## 🧾 Créditos e Licença
-1. Desenvolvido por: Ana Beatriz Moreira da Silva
+Desenvolvido por: Ana Beatriz Moreira da Silva
 
 Curso: Desenvolvimento Front-End
 
