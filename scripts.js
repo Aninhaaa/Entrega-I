@@ -1,8 +1,3 @@
-/* js/scripts.js
-   Máscaras simples + Validação + Busca automática de endereço (ViaCEP)
-   Versão: 2.0
-*/
-
 (function () {
   'use strict';
 
@@ -54,13 +49,11 @@
   const cpfEl = document.getElementById('cpf');
   const telEl = document.getElementById('telefone');
   const cepEl = document.getElementById('cep');
-  const form = document.querySelector('form');
+  const form = document.getElementById('cadastroForm');
 
-  // --- Máscaras em tempo real ---
   if (cpfEl) {
     cpfEl.setAttribute('inputmode', 'numeric');
     cpfEl.addEventListener('input', e => applyMask(e.target, formatCPF));
-    cpfEl.addEventListener('keypress', e => { if (!/\d/.test(e.key)) e.preventDefault(); });
   }
 
   if (telEl) {
@@ -72,26 +65,21 @@
     cepEl.setAttribute('inputmode', 'numeric');
     cepEl.addEventListener('input', e => {
       applyMask(e.target, formatCEP);
-
       const raw = onlyDigits(e.target.value);
-      if (raw.length === 8) {
-        buscarEndereco(raw);
-      }
+      if (raw.length === 8) buscarEndereco(raw);
     });
-    cepEl.addEventListener('keypress', e => { if (!/\d/.test(e.key)) e.preventDefault(); });
   }
 
-  // --- Busca de endereço automática via ViaCEP ---
+  // Busca de endereço via ViaCEP
   function buscarEndereco(cep) {
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then(response => response.json())
       .then(data => {
         if (data.erro) {
-          alert('CEP não encontrado. Verifique e tente novamente.');
+          alert('CEP não encontrado.');
           return;
         }
-        // tenta preencher automaticamente campos compatíveis
-        const logradouro = document.getElementById('endereco') || document.getElementById('logradouro');
+        const logradouro = document.getElementById('endereco');
         const bairro = document.getElementById('bairro');
         const cidade = document.getElementById('cidade');
         const estado = document.getElementById('estado');
@@ -101,28 +89,22 @@
         if (cidade) cidade.value = data.localidade || '';
         if (estado) estado.value = data.uf || '';
       })
-      .catch(() => {
-        alert('Erro ao consultar o CEP. Verifique sua conexão.');
-      });
+      .catch(() => alert('Erro ao consultar o CEP.'));
   }
 
-  // --- Validação no envio ---
+  // Validação e envio do formulário
   if (form) {
     form.addEventListener('submit', ev => {
+      ev.preventDefault();
       if (!form.checkValidity()) {
         form.reportValidity();
-        ev.preventDefault();
         return;
       }
-
-      ev.preventDefault(); // remove para enviar de verdade
       const btn = form.querySelector('button[type="submit"]');
       if (btn) {
         btn.disabled = true;
         btn.textContent = 'Enviando...';
       }
-
-      // simulação de envio assíncrono
       setTimeout(() => {
         alert('Cadastro enviado com sucesso!');
         form.reset();
@@ -130,8 +112,7 @@
           btn.disabled = false;
           btn.textContent = 'Enviar Cadastro';
         }
-      }, 1200);
+      }, 1000);
     });
   }
-
 })();
